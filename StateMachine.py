@@ -10,7 +10,6 @@ class States(enum.Enum):
     MakeTask = 5
 
 
-
 class State:
     STATE_TYPES = {
         'Menu': 0,
@@ -22,7 +21,7 @@ class State:
     }
 
     STATE_TYPES_NAMES = {
-        #'Начать': 0,
+        # 'Начать': 0,
         'Напомнить дежурным': 1,
         'Показать расписание': 2,
 
@@ -38,7 +37,8 @@ class State:
         },
         States.RemindDuty: {
             'Start': 0,
-            'ChoiceLocation' : 1
+            'ChoiceLocation': 1,
+            'End': 2
         },
         States.ShowTasks: {
             'Start': 0,
@@ -71,6 +71,8 @@ class State:
             else:
                 self.currentType = States.Menu
                 self.currentState = 0
+        elif self.currentState + 2 in list(State.STATE[self.currentType].values()):
+            self.currentState += 1
         else:
             self.currentState = 0
             self.currentType = States.Menu

@@ -3,6 +3,7 @@ from vk_api.utils import get_random_id
 
 from StateMachine import State, States
 from Data import Data
+from datetime import datetime, date, time
 
 
 class Bot:
@@ -34,13 +35,19 @@ class Bot:
         elif self.state.getType() == States.RemindDuty:
             if self.state.getState() == 1:
                 keyboard = Bot.createKeyboard(keyboard, self.locations)
-
                 message = 'Выберите локацию'
+            elif self.state.getState() == State.STATE[States.RemindDuty]['End']:
+                # TODO: Add action
+                keyboard = Bot.createKeyboard(keyboard, list(State.STATE_TYPES_NAMES.keys()))
+                # TODO: Add message
+                message = 'TODO'
+                pass
+
 
         return {
             'keyboard': keyboard.get_keyboard(),
             'message': message
-               }
+        }
 
     def send(self, args=None):
         self.state.next(args)
@@ -55,4 +62,27 @@ class Bot:
         )
 
     def logState(self, args=None):
-        print('Type: {}, State: {}, args:{}'.format(self.state.getType(),self.state.getState(), args))
+        print('Type: {}, State: {}, args:{}'.format(self.state.getType(), self.state.getState(), args))
+
+
+class Task:
+
+    def __init__(self, task_text, task_author, task_perfomer):
+        self.task_text = task_text
+        self.task_author = task_author
+        self.task_perfomer = task_perfomer
+        self.task_create_date = datetime.now().__str__()
+        self.task_close_date = 0
+
+        self.task_comment = ''
+
+    def Log(self):
+        f = open('log.txt', 'a')
+        f.write(
+            '!' + '=' * 10 + '!' + '\n' +
+            'Task: {}'.format(self.task_text) + '\n' +
+            'To: {}'.format(self.task_perfomer) + '\n' +
+            'From: {}'.format(self.task_author) + '\n' +
+            'Create Date ' + self.task_create_date + '\n' +
+            'Close Date' + datetime.now().__str__()
+        )
