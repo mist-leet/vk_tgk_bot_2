@@ -1,3 +1,5 @@
+# coding=utf-8
+
 from Bot import Task, Bot
 from Duty import Duty
 
