@@ -8,6 +8,11 @@ class Duty:
         self.duty = self.Create()
 
     def Create(self):
+        #tmp_rooms = random.shuffle(self.rooms)[0:len(self.locations)]
+        return dict(zip(self.locations, self.rooms[0:len(self.locations)]))
 
-        tmp_rooms = random.shuffle(self.rooms)
-        duty = dict(zip(tmp_rooms, self.locations[0:len(self.rooms)]))
+    def Clear(self):
+        self.duty.clear()
+
+    def Update(self, key, value):
+        self.duty.update(key, value)

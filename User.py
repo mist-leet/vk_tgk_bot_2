@@ -1,4 +1,5 @@
 from Bot import Task, Bot
+from Duty import Duty
 
 
 class User:
@@ -23,3 +24,6 @@ class User:
             if user.peer == peer_to_check:
                 return user
         return 0
+
+    def updateDuty(self, duty : Duty):
+        self.Bot.updateDuty(duty)

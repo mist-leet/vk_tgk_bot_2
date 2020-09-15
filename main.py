@@ -2,6 +2,9 @@ from vk_api.longpoll import VkLongPoll, VkEventType
 
 import requests
 import vk_api
+
+from Data import Data
+from Duty import Duty
 from Bot import Bot
 from private import private_key
 from User import User
@@ -26,17 +29,19 @@ vk = vk_session.get_api()
 # my_peer = '119568994'
 # bot = Bot(vk, my_peer)
 
-users= []
+users = []
 current_user = 0
+current_duty = Duty(Data.getRooms(), Data.getLocations())
+
 # bot.send()
+print('starting...')
 for event in longpoll.listen():
 
     current_user = User.isInUsers(event.peer_id, users)
     if current_user == 0:
         users.append(User(vk, '', event.peer_id))
+        users[-1].updateDuty(current_duty)
         current_user = users[-1]
 
     if event.type == VkEventType.MESSAGE_NEW and event.to_me and event.text:
         current_user.Bot.send(event.text)
-        for x in users:
-            print(x.peer)
