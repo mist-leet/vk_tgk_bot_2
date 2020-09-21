@@ -28,12 +28,10 @@ vk_session = vk_api.VkApi(token=private_key)
 longpoll = MyLongPoll(vk_session)
 vk = vk_session.get_api()
 
-# my_peer = '119568994'
-# bot = Bot(vk, my_peer)
 
 users = []
 current_user = 0
-current_duty = Duty(Data.getRooms(), Data.getLocations())
+current_duty = Data.getTmpDuty()
 
 # bot.send()
 print('starting...')

@@ -2,6 +2,7 @@
 
 import random
 
+
 class Duty:
 
     def __init__(self, rooms, locations):
@@ -10,7 +11,6 @@ class Duty:
         self.duty = self.Create()
 
     def Create(self):
-        #tmp_rooms = random.shuffle(self.rooms)[0:len(self.locations)]
         return dict(zip(self.locations, self.rooms[0:len(self.locations)]))
 
     def Clear(self):

@@ -1,6 +1,8 @@
 # coding=utf-8
-class Data:
+from Duty import Duty
 
+
+class Data:
     moderators = [
         'enter moderators id_s'
     ]
@@ -8,18 +10,60 @@ class Data:
     @staticmethod
     def getRooms():
         rooms = [
-            Room('White Room',
+            Room('Красная комната',
+                 [
+                     'Кристина Ботнарь', '152220652',
+                     'Татьяна Дамрина', 'tdamrina',
+                 ]),
+            Room('ГЕСТ 8',
+                 [
+                     'Борис', 'shtormnamore',
+                 ]),
+            Room('Голубая лагуна',
                  [
                      'Илья', 'mistleet',
+                     'Арсен', 'emshv_arsn',
                  ]),
-            Room('Black Room',
+            Room('Гнездышко',
                  [
-                     'Федя', '614323093',
+                     'Серафима', 'avolzok_se',
+                     'Женя', 'evgenysergeevich90',
                  ]),
-            Room('Red Room',
+            Room('Нора',
                  [
-                     'Коля', '614323013',
-                 ])
+                     'Жанна', '529306038',
+                 ]),
+            Room('ГЕСТ 4',
+                 [
+                     'Арзу', '198886807',
+                     'Мира', 'mirokkg',
+                     'Наташа', 'natalie_noymann',
+                 ]),
+            Room('Белая комната',
+                 [
+                     'Софа', '133687981',
+                     'Настя', 'ebeniesexom',
+                 ]),
+            Room('Аня & Юля',
+                 [
+                     'Юля', '16144866',
+                     'Аня', 'n_mori_an',
+                 ]),
+            Room('Настя & Маша',
+                 [
+                     'Настя Маркова', 'mindalllka',
+                     'Маша', 'mashasergeeva98',
+                 ]),
+            Room('Алексеи',
+                 [
+                     'Алексей Мазырин', 'lampowl',
+                     'Алексей Бахмет', '109997707',
+                 ]),
+            # Room('',
+            #      [
+            #          '', '',
+            #          '', '',
+            #      ]),
         ]
         for i in range(7):
             rooms.append(Room(
@@ -32,7 +76,12 @@ class Data:
 
     @staticmethod
     def getLocations():
-        return ['Location #' + str(i) for i in range(3)]
+        return [
+            'Красный ковер',
+            'Раздельный сбор',
+            'Кухня',
+            'Ванная'
+        ]
 
     @staticmethod
     def isModerator(id):
@@ -40,6 +89,21 @@ class Data:
             return True
         else:
             return False
+
+    @staticmethod
+    def getTmpDuty():
+        rooms = Data.getRooms()
+        locations = Data.getLocations()
+
+        return Duty([
+            next(filter(lambda x: x.rooms_name == 'Настя & Маша', rooms)),
+            next(filter(lambda x: x.rooms_name == 'Нора', rooms)),
+            next(filter(lambda x: x.rooms_name == 'ГЕСТ 4', rooms)),
+            next(filter(lambda x: x.rooms_name == 'Белая комната', rooms)),
+        ],
+            Data.getLocations()
+        )
+
 
 class Room:
 
