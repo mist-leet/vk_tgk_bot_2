@@ -96,10 +96,10 @@ class Data:
         locations = Data.getLocations()
 
         return Duty([
-            next(filter(lambda x: x.room_name == 'Настя & Маша', rooms)),
-            next(filter(lambda x: x.room_name == 'Нора', rooms)),
-            next(filter(lambda x: x.room_name == 'ГЕСТ 4', rooms)),
-            next(filter(lambda x: x.room_name == 'Белая комната', rooms)),
+            next(filter(lambda x: x.rooms_name == 'Настя & Маша', rooms)),
+            next(filter(lambda x: x.rooms_name == 'Нора', rooms)),
+            next(filter(lambda x: x.rooms_name == 'ГЕСТ 4', rooms)),
+            next(filter(lambda x: x.rooms_name == 'Белая комната', rooms)),
         ],
             Data.getLocations()
         )
