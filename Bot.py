@@ -153,22 +153,15 @@ class Bot:
         self.logState(args)
         responseData = self.getResponseData(args)
 
-        self.__send(self.peer,
-                    responseData['message'],
-                    responseData['keyboard'])
-
-        # self.vk.messages.send(
-        #     user_id=self.peer,
-        #     random_id=get_random_id(),
-        #     message=responseData['message'],
-        #     keyboard=responseData['keyboard']
-        # )
+        self.send_message(self.peer,
+                          responseData['message'],
+                          responseData['keyboard'])
 
     def logState(self, args=None):
         print('Type: {}\n State: {}\n args: {}\n peer: {}\n\n'.format(self.state.getType(), self.state.getState(), args,
                                                                       self.peer))
 
-    def __send(self, peer, message, keyboard=None, name=None):
+    def send_message(self, peer, message, keyboard=None, name=None):
         try:
             if keyboard is not None:
                 if re.match(r'[\d]+', str(peer)) is not None:
@@ -201,7 +194,7 @@ class Bot:
         except ApiError as e:
             print(e.args)
             print(e.values)
-            self.__send(self.peer, 'Кажется, резидент {} с id: {} еще не зарегистрировался.'
+            self.send_message(self.peer, 'Кажется, резидент {} с id: {} еще не зарегистрировался.'
                                    ' \n Пожалуйста, перешлите это сообщение @mistleet'.format(str(name), str(peer)))
             return False
         return True
@@ -221,7 +214,7 @@ class Bot:
         message = ''
 
         for name, id in room.room.items():
-            result = self.__send(
+            result = self.send_message(
                 id,
                 'Привет, {}, кажется, {} стоит уделить внимание!'.format(Helper.BuildPersonLink(id, name), location) +
                 '\n' + Helper.BuildComment(comment),

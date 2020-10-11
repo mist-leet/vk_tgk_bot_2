@@ -59,19 +59,17 @@ class Data:
                      'Алексей Мазырин', 'lampowl',
                      'Алексей Бахмет', '109997707',
                  ]),
+            Room('Настя & Руслан',
+                 [
+                     'Руслан', 'solorman',
+                     'Настя', 'nasiba1801',
+                 ]),
             # Room('',
             #      [
             #          '', '',
             #          '', '',
             #      ]),
         ]
-        for i in range(7):
-            rooms.append(Room(
-                'room # {}'.format(str(i)),
-                [
-                    '{}'.format(str(j)) * 10 for j in range(4)
-                ])
-            )
         return rooms
 
     @staticmethod

@@ -22,26 +22,26 @@ class MyLongPoll(VkLongPoll):
                 print(e)
 
 
-session = requests.Session()
-vk_session = vk_api.VkApi(token=private_key)
+if __name__ == "__main__":
+    session = requests.Session()
+    vk_session = vk_api.VkApi(token=private_key)
 
-longpoll = MyLongPoll(vk_session)
-vk = vk_session.get_api()
+    longpoll = MyLongPoll(vk_session)
+    vk = vk_session.get_api()
 
+    users = []
+    current_user = 0
+    current_duty = Data.getTmpDuty()
 
-users = []
-current_user = 0
-current_duty = Data.getTmpDuty()
+    # bot.send()
+    print('starting...')
+    for event in longpoll.listen():
 
-# bot.send()
-print('starting...')
-for event in longpoll.listen():
+        current_user = User.isInUsers(event.peer_id, users)
+        if current_user == 0:
+            users.append(User(vk, '', event.peer_id))
+            users[-1].updateDuty(current_duty)
+            current_user = users[-1]
 
-    current_user = User.isInUsers(event.peer_id, users)
-    if current_user == 0:
-        users.append(User(vk, '', event.peer_id))
-        users[-1].updateDuty(current_duty)
-        current_user = users[-1]
-
-    if event.type == VkEventType.MESSAGE_NEW and event.to_me and event.text:
-        current_user.Bot.send(event.text)
+        if event.type == VkEventType.MESSAGE_NEW and event.to_me and event.text:
+            current_user.Bot.send(event.text)
