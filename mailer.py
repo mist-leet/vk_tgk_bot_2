@@ -11,17 +11,7 @@ MESSAGE_FILE = 'message.txt'
 
 # targets = Data.getRooms()
 
-rooms = [Room('Голубая лагуна',
-     [
-         'Илья', 'mistleet',
-         'Ильяc', 'mistlee'
-     ]),
-         Room('Голубая лагуна',
-              [
-                  'Илья', 'mistleet',
-                  'Ильяc', 'mistlee'
-              ])
-         ]
+rooms = Data.getRooms()
 
 message = ''.join(open(MESSAGE_FILE).readlines())
 
